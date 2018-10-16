@@ -24,6 +24,9 @@ class NeuralNetwork:
         self.layers = self.create_layers_by_archetype(archetype)
         self.archetype = archetype
 
+    def __init__(self, name_file):
+        self.loadNetworkFromFile(name_file)
+
     def create_layers_by_archetype(self, archetype):
         layers = []
         for i in range(0, len(archetype)-1):
@@ -48,9 +51,11 @@ class NeuralNetwork:
 
     def loadNetworkFromFile(self, file_name):
         file_handler = open(file_name, "r")
-        archetype = np.array(file_handler.readline())
-        # wczytywac weights i biases do sieci + inicjalizacja przez konstruktor
-
+        self.archetype = np.array(file_handler.readline())
+        for i in range (0, len(self.archetype)-1):
+            layer = Layer()
+            layer.biases = []
+            layer.weights = []
 
 
 nn = NeuralNetwork([6, 5, 4, 4, 5])
